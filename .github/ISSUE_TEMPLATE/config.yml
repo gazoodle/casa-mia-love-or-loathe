@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a problem with Love it or Loathe it
+    url: https://github.com/gazoodle/casa-mia/issues
+    about: Love it or Loathe it is part of Casa Mia, and its issues are kept there.

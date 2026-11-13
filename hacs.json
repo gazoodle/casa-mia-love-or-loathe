@@ -1,0 +1,7 @@
+{
+  "name": "Love it or Loathe it",
+  "homeassistant": "2026.3.0",
+  "zip_release": true,
+  "filename": "love_or_loathe.zip",
+  "hide_default_branch": true
+}
