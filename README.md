@@ -11,7 +11,7 @@
 An automatic media watcher that boosts the volume for a song you love, or changes the
 radio station for one you loathe.
 
-> **Maturity: Alpha.** Does its job every day in the author's house, but hasn't been tried in many others. Expect rough edges and changes. ([The levels](https://github.com/gazoodle/casa-mia/blob/2026.11.7/docs/README.md#maturity))
+> **Maturity: Alpha.** Does its job every day in the author's house, but hasn't been tried in many others. Expect rough edges and changes. ([The levels](https://github.com/gazoodle/casa-mia/blob/2026.11.8/docs/README.md#maturity))
 
 Sick of Xmas songs in November, yet love them in December? Then this is for you. But
 that's not all: you can mark songs as loved or loathed, live, as they are playing.
@@ -27,9 +27,10 @@ truly love to hear.
 A full integration with events, so you can trigger your own automations too, including
 notifications of what happened!
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.7/docs/screenshots/love-or-loathe-detail.webp" alt="Love it or Loathe it's page in Casa Mia for an entry named Downstairs. Playing now: the kitchen is away on another station until 14:10, the living room is playing a song in the group Loathed by Ben, and the garden a song in Loved by Ann, each with Love it and Loathe it buttons. Under them the groups of songs, each with Love, Loathe and Ignore to click: Christmas songs, Heard too often, Loved by Ann and Loathed by Ben" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.8/docs/screenshots/love-or-loathe-detail.webp" alt="Love it or Loathe it's page in Casa Mia for an entry named Downstairs. Playing now: the kitchen is away on another station until 14:10, the living room is playing a song in the group Loathed by Ben, and the garden a song in Loved by Ann, each with Love it and Loathe it buttons. Under them the groups of songs, each with Love, Loathe and Ignore to click: Christmas songs, Heard too often, Loved by Ann and Loathed by Ben" width="800">
 
-**Not built yet:** shunting the adverts, and the fade. Casa Mia's local radio station
+**Not built yet:** the fade. Adverts can be shunted for a station that names them
+(see "Adverts" under the worked examples). Casa Mia's local radio station
 is a Casa Mia feature still to come, not part of this integration: when it exists, it
 is one more station to switch to. The rest of this guide describes what works today.
 
@@ -56,7 +57,7 @@ It is an integration of its own, **Love it or Loathe it**. It runs wholly in Hom
 Assistant and needs neither the Casa Mia app nor the Casa Mia integration. Installed by
 itself, from HACS or the Marketplace, it is set up and changed with Home Assistant's own
 screens. With the Casa Mia app it also has a page there, which changes the same
-settings. [Two ways to change its settings](https://github.com/gazoodle/casa-mia/blob/2026.11.7/docs/applets/love-or-loathe.md#two-ways-to-change-its-settings) lists
+settings. [Two ways to change its settings](https://github.com/gazoodle/casa-mia/blob/2026.11.8/docs/applets/love-or-loathe.md#two-ways-to-change-its-settings) lists
 both.
 
 
@@ -73,14 +74,14 @@ Love it or Loathe it needs Home Assistant 2026.3.0 or later.
 2. Download Love it or Loathe it there, then restart Home Assistant.
 3. In Settings → Devices & services, choose Add integration and pick Love it or Loathe it.
 
-The [guide](https://github.com/gazoodle/casa-mia/blob/2026.11.7/docs/applets/love-or-loathe.md) covers setting it up and everything it does.
+The [guide](https://github.com/gazoodle/casa-mia/blob/2026.11.8/docs/applets/love-or-loathe.md) covers setting it up and everything it does.
 
 ## Part of Casa Mia
 
 Love it or Loathe it is part of [Casa Mia](https://github.com/gazoodle/casa-mia), where it is written and
-released. This repository is generated from Casa Mia 2026.11.7 (commit `cd152d50c4`) and
+released. This repository is generated from Casa Mia 2026.11.8 (commit `a23317266f`) and
 isn't edited by hand, so [issues](https://github.com/gazoodle/casa-mia/issues) and changes go to Casa Mia.
 
 The Casa Mia app installs this same integration itself. A house with both needs to do
-nothing about it: [With HACS or the Marketplace](https://github.com/gazoodle/casa-mia/blob/2026.11.7/docs/applets/love-or-loathe.md#with-hacs-or-the-marketplace)
+nothing about it: [With HACS or the Marketplace](https://github.com/gazoodle/casa-mia/blob/2026.11.8/docs/applets/love-or-loathe.md#with-hacs-or-the-marketplace)
 says what happens.
