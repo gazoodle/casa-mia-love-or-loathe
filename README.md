@@ -11,7 +11,7 @@
 An automatic media watcher that boosts the volume for a song you love, or changes the
 radio station for one you loathe.
 
-> **Maturity: Alpha.** Does its job every day in the author's house, but hasn't been tried in many others. Expect rough edges and changes. ([The levels](https://github.com/gazoodle/casa-mia/blob/2026.11.11/docs/README.md#maturity))
+> **Maturity: Alpha.** Does its job every day in the author's house, but hasn't been tried in many others. Expect rough edges and changes. ([The levels](https://github.com/gazoodle/casa-mia/blob/2026.11.12/docs/README.md#maturity))
 
 Sick of Xmas songs in November, yet love them in December? Then this is for you. But
 that's not all: you can mark songs as loved or loathed, live, as they are playing.
@@ -27,7 +27,7 @@ truly love to hear.
 A full integration with events, so you can trigger your own automations too, including
 notifications of what happened!
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe-detail.webp" alt="Love it or Loathe it's page in Casa Mia for an entry named Downstairs. Playing now: the kitchen is away on another station until 14:10, the living room is playing a song in the group Loathed by Ben, and the garden a song in Loved by Ann, each with Love it and Loathe it buttons. Under them the groups of songs, each with Love, Loathe and Ignore to click: Christmas songs, Heard too often, Loved by Ann and Loathed by Ben" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe-detail.webp" alt="Love it or Loathe it's page in Casa Mia for an entry named Downstairs. Playing now: the kitchen is away on another station until 14:10, the living room is playing a song in the group Loathed by Ben, and the garden a song in Loved by Ann, each with Love it and Loathe it buttons. Under them the groups of songs, each with Love, Loathe and Ignore to click: Christmas songs, Heard too often, Loved by Ann and Loathed by Ben" width="800">
 
 **Not built yet:** the fade. Adverts can be shunted for a station that names them
 (see "Adverts" under the worked examples). Casa Mia's local radio station
@@ -157,7 +157,7 @@ There are two places to change them, and both change the same thing:
 | Add a group of songs | **Add a group of songs** | **+ Add a group** |
 | Change a group | The group's menu → **Reconfigure** | Click the group |
 | Change a group's feeling | The group's select, or its form | Love, Loathe or Ignore on its row |
-| Add a station | **Add a station**, which browses for it | **+ Add a station**, taken from what a player is on |
+| Add a station | **Add a station**, which browses for it | **+ Add a station**, from the players' favourites or by an address |
 | Remove a group or a station | Its menu → Delete | **Remove** |
 | Put groups or stations in order | Not possible: they stay in the order made | The up and down buttons |
 | Switch an entry off | Its **Watching** switch | The switch beside its name |
@@ -174,7 +174,7 @@ Everything below can be done with Home Assistant's own screens. Where the Casa M
 is installed as well, its Home page has a **Love it or Loathe it** tile once the
 integration has been added, and the tile opens a page with all of it on one screen:
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe.webp" alt="The Love it or Loathe it page inside Home Assistant: the entry Downstairs with its Watching switch and Players button, what its three players are playing now, and its groups of songs and stations" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe.webp" alt="The Love it or Loathe it page inside Home Assistant: the entry Downstairs with its Watching switch and Players button, what its three players are playing now, and its groups of songs and stations" width="800">
 
 - **Playing now:** each player, the song it is on, and the group that has the song.
   **Love it** and **Loathe it** rate the song, as yourself or as a person who has
@@ -198,9 +198,17 @@ made on the page is the same group on Home Assistant's screens, with the same se
 and a save is refused for the same reasons. Adding the integration, adding it again for
 other players and deleting an entry are done in Home Assistant.
 
-The page can't browse for a station. Tune a player to the station and use **Make it a
-station**, or add the station from the integration's page in Home Assistant, which can
-browse.
+**+ Add a station** lists the favourites of the entry's players (their sources, as Home
+Assistant calls them: on a Sonos these are your Sonos favourites). Choose one and it is
+saved by its name. When a player is switched to it, the speaker is asked for that
+favourite, so it shows the station's name and picture as it does when you choose the
+favourite yourself. A player is switched back the same way when the station it was on is
+one of its favourites.
+
+A station that is not a favourite can be given by its address: choose **Another station,
+by its address…**, or tune a player to it and use **Make it a station**. The integration's
+page in Home Assistant can browse for one too. A station given by an address plays, but a
+Sonos then shows no name or picture for it, because the address carries neither.
 
 ## Groups of songs
 
@@ -258,6 +266,15 @@ the group's feeling, and it is acted on at once.
   player goes back to what it was playing, or at the end of the song then playing if
   the entry's **Switch back at the end of a song** is on.
 - **Only fire the event.**
+
+**A loathed song that is one of a queue is skipped.** Where the song has a length, comes
+from no station and the player can go to the next, a group that would mute it or switch
+station skips it instead: muting leaves a silence the length of the song, and a queue
+has no station to come back to. There is nothing to set up. It doesn't apply to a group
+that changes the volume or only fires the event, or to a song played too often. After
+five songs skipped one after another, the next is given its group's own action, so a
+queue of nothing but loathed songs isn't skipped round for ever. If the player refuses
+the skip (the last song of a queue has no next), the group's own action is used.
 
 A switch can't end at the next track, as a mute does, because once the player has left
 a station nothing reports what that station is playing.
@@ -358,7 +375,7 @@ Assistant:
   by naming them, such as a wall tablet's. Any other login can only rate as the person
   it belongs to. An administrator may always name a person, and so may an automation.
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe-who-may-rate.webp" alt="The foot of an entry's Settings dialog: Who may rate, with Ann and Ben switched on, and Screens that may rate for them, with two logins switched off" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe-who-may-rate.webp" alt="The foot of an entry's Settings dialog: Who may rate, with Ann and Ben switched on, and Screens that may rate for them, with two logins switched off" width="800">
 
 So a guest's login can't rate: it belongs to nobody on the first list, and it isn't on
 the second, so it can't name someone who is. A rating that isn't allowed is refused with
@@ -375,7 +392,7 @@ The integration brings a dashboard card with it, **Casa Mia Love it or Loathe it
 thumb up and a thumb down for the song a media player is playing. Add it from the
 dashboard's card picker and choose the player.
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe-thumbs-card.webp" alt="Three media players on a dashboard, each with thumbs cards under it. Ann's thumb up is lit green for the song in the garden, and Ben's thumb down is lit red for the song in the living room; the other thumbs are outlines" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe-thumbs-card.webp" alt="Three media players on a dashboard, each with thumbs cards under it. Ann's thumb up is lit green for the song in the garden, and Ben's thumb down is lit red for the song in the living room; the other thumbs are outlines" width="800">
 
 - A tap on a thumb rates the song for whoever is signed in. The thumb then stays lit
   for that person whenever the song is on.
@@ -403,7 +420,7 @@ The same thumbs are in the top of Home Assistant's dialog for a media player, th
 that opens when you tap a player on any card. So every card that shows a watched player
 has them one tap away, and no dashboard needs editing.
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe-thumbs-dialog.webp" alt="Home Assistant's dialog for the media player Garden, playing a song. In its header, before the dialog's own icons, a thumb up lit green and a thumb down in outline" width="450">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe-thumbs-dialog.webp" alt="Home Assistant's dialog for the media player Garden, playing a song. In its header, before the dialog's own icons, a thumb up lit green and a thumb down in outline" width="450">
 
 They are added only for a player the integration watches, and only for a login that
 may rate. Another player's dialog, a guest's, and a wall tablet signed in as nobody are
@@ -590,7 +607,12 @@ Its attributes:
 | `repeats` | How many times the song has been played in the entry's hours, when that is why it was struck; 0 when a group had it. |
 | `at` | When. |
 | `away` | Each player now on another station, and when it goes back. |
+| `players` | For each player, what was last done to it: `did` (in words), `because` (the song and why, in words that follow "because"), `why` (the same as the log words it), `at`, and `now`, which is true while that is still in force (a volume or mute to be put back, or another station to come back from). |
 | `no_titles` | Players that are playing but report no title, so nothing can be matched. |
+
+`action` is the group's action, or `skip` for a song in a queue that was skipped. Jukebox
+reads `players` to show why a player was changed (its guide, "With Love it or Loathe
+it").
 
 Each match also fires the event `casa_mia_love_or_loathe`, with the same fields as far
 as `at`, so an automation can do anything else:
@@ -614,7 +636,7 @@ or loathes a song, or takes their rating away:
 | `feeling` | `love`, `loathe`, or `clear` for a rating taken away. |
 | `title`, `artist` | The song. |
 
-[Dash-Bored](https://github.com/gazoodle/casa-mia/blob/2026.11.11/docs/applets/dash-bored.md) announces these in its Personal column.
+[Dash-Bored](https://github.com/gazoodle/casa-mia/blob/2026.11.12/docs/applets/dash-bored.md) announces these in its Personal column.
 
 Every match, action and return is in Home Assistant's log.
 
@@ -638,7 +660,7 @@ The page in Casa Mia shows the last 100 lines since Home Assistant started, unde
 Last match sensor: open the sensor, or the entry's device, to read them there. The
 Logbook keeps them for as long as it keeps anything.
 
-<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.11/docs/screenshots/love-or-loathe-what-happened.webp" alt="What happened, on the page: lines with a time, a pill and the words. A match for a Christmas song in the kitchen, then Done: switched to another station until 14:10. A match for a song Ann loves in the garden, then the volume from 40% to 44% until the next track. A match for a song Ben loathes, then muted. Before them, Started, Stopped, a rating by Ben and a volume put back" width="800">
+<img src="https://raw.githubusercontent.com/gazoodle/casa-mia/2026.11.12/docs/screenshots/love-or-loathe-what-happened.webp" alt="What happened, on the page: lines with a time, a pill and the words. A match for a Christmas song in the kitchen, then Done: switched to another station until 14:10. A match for a song Ann loves in the garden, then the volume from 40% to 44% until the next track. A match for a song Ben loathes, then muted. Before them, Started, Stopped, a rating by Ben and a volume put back" width="800">
 
 ## Switching an entry off
 
@@ -678,7 +700,7 @@ you change it, it is left as it is; delete it to have the current one again.
 ## Part of Casa Mia
 
 Love it or Loathe it is part of [Casa Mia](https://github.com/gazoodle/casa-mia), where it is written and
-released. This repository is generated from Casa Mia 2026.11.11 (commit `791e4c34cd`) and
+released. This repository is generated from Casa Mia 2026.11.12 (commit `459d2be124`) and
 isn't edited by hand, so a change to Love it or Loathe it is made in Casa Mia. A problem with it is
 reported here, in this repository's [issues](https://github.com/gazoodle/casa-mia-love-or-loathe/issues).
 
